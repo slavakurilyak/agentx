@@ -1,8 +1,24 @@
 # AgentX
 
+AgentX is an AI controller that relies on three LLM chains to perform tasks. The code for AgentX was inspired by [this example](https://python.langchain.com/en/latest/use_cases/agents/baby_agi.html) and [this repository](https://github.com/yoheinakajima/babyagi/tree/main).
+
+## Proposed Architecture
+
+1.  A user interacts with AgentX, requesting assistance with a task.
+2.  AgentX processes the request and retrieves the necessary tools to help with the task.
+3.  AgentX selects the relevant tools from the available options: Auto-GPT, BabyAGI, HuggingFace, and Other AI Agent.
+4.  Each selected tool is then used to complete the task:
+    -   Auto-GPT completes the task using its capabilities.
+    -   BabyAGI completes the task using its capabilities.
+    -   HuggingFace completes the task using its capabilities.
+    -   Other AI Agent completes the task using its capabilities.
+5.  The results from each tool are combined into a coherent and comprehensive output.
+6.  AgentX receives the combined results and processes them to provide the best response.
+7.  Finally, AgentX presents the response to the user.
+
 ![](agentx-proposed-architecture.png)
 
-AgentX is an AI controller that relies on three LLM chains to perform tasks. The code for AgentX was inspired by [this example](https://python.langchain.com/en/latest/use_cases/agents/baby_agi.html) and [this repository](https://github.com/yoheinakajima/babyagi/tree/main).
+AgentX flowchart generated using Mermaid.js
 
 ## Installation
 
