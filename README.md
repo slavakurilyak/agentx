@@ -1,5 +1,7 @@
 # AgentX
 
+![](agentx-proposed-architecture.png)
+
 AgentX is an AI controller that relies on three LLM chains to perform tasks. The code for AgentX was inspired by [this example](https://python.langchain.com/en/latest/use_cases/agents/baby_agi.html) and [this repository](https://github.com/yoheinakajima/babyagi/tree/main).
 
 ## Installation
