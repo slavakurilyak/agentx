@@ -14,7 +14,6 @@ from pydantic import BaseModel, Field
 from langchain.chains.base import Chain
 
 # Connect to the Vector Store
-# Depending on what vectorstore you use, this step may look different.
 
 from langchain.vectorstores import FAISS
 from langchain.docstore import InMemoryDocstore
@@ -250,7 +249,7 @@ class BabyAGI(Chain, BaseModel):
 
 # Run the BabyAGI
 
-# Now it’s time to create the BabyAGI controller and watch it try to accomplish your objective.
+# Create the BabyAGI controller and watch it try to accomplish your objective.
 
 OBJECTIVE = "Write a weather report for SF today"
 
