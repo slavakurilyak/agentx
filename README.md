@@ -24,6 +24,13 @@ AgentX flowchart generated using Mermaid.js
 
 Auto-GPT and BabyAGI do not (yet) have APIs to interact with. Also they do not (yet) have JSON manifest files (`.well-known/ai-plugin.json` and `.well-known/openai.yaml`), as described by [OpenAI](https://platform.openai.com/docs/plugins/production/plugins-in-production). This means, AgentX is (currently) limited to interacting with Auto-GPT and BabyAGI directly from the source via `$ git clone`. *More details coming soon.*
 
+## Progress
+
+- [x] babyagi via LangChain (see [baby_agi.pi](baby_agi.py) and [baby_agi_with_tools.py](baby_agi_with_tools.py))
+- [ ] Auto-GPT from source ([see issue](https://github.com/slavakurilyak/agentx/issues/1))
+- [ ] babyagi from source ([see issue](https://github.com/slavakurilyak/agentx/issues/2))
+- [ ] Teenage-AGI from source ([see issue](https://github.com/slavakurilyak/agentx/issues/3))
+
 ## Installation
 
 1. Clone this repository
