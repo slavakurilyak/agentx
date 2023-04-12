@@ -27,9 +27,9 @@ Auto-GPT and BabyAGI do not (yet) have APIs to interact with. Also they do not (
 ## Progress
 
 - [x] babyagi via LangChain (see [baby_agi.pi](baby_agi.py) and [baby_agi_with_tools.py](baby_agi_with_tools.py))
-- [ ] Auto-GPT from source ([see issue](https://github.com/slavakurilyak/agentx/issues/1))
-- [ ] babyagi from source ([see issue](https://github.com/slavakurilyak/agentx/issues/2))
-- [ ] Teenage-AGI from source ([see issue](https://github.com/slavakurilyak/agentx/issues/3))
+- [ ] Auto-GPT from source (see [issue](https://github.com/slavakurilyak/agentx/issues/1))
+- [ ] babyagi from source (see [issue](https://github.com/slavakurilyak/agentx/issues/2))
+- [ ] Teenage-AGI from source (see [issue](https://github.com/slavakurilyak/agentx/issues/3))
 
 ## Installation
 
