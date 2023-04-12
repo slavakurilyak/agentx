@@ -19,16 +19,17 @@ AgentX is a LangChain-powered agent that delegates tasks well. AgentX accomplish
 ```mermaid
 graph TB
 A[User] --> B[AgentX]
-B --> C[Delegate Task to Agent]
-C --> D1[Auto-GPT]
-C --> D2[BabyAGI]
-C --> D3[HuggingFace]
-C --> D4[Other AI Agent]
-D1 --> E1[Complete Task with Auto-GPT]
-D2 --> E2[Complete Task with BabyAGI]
-D3 --> E3[Complete Task with HuggingFace]
-D4 --> E4[Complete Task with Other AI Agent]
-E1 --> F[Combine Results]
+B --> C[Find Relevant Agent]
+C --> D{Delegate Task to Agent}
+D --> E1[Auto-GPT]
+D --> E2[BabyAGI]
+D --> E3[HuggingFace]
+D --> E4[Other AI Agent]
+E1 --> F1[Complete Task with Auto-GPT]
+E2 --> F2[Complete Task with BabyAGI]
+E3 --> F3[Complete Task with HuggingFace]
+E4 --> F4[Complete Task with Other AI Agent]
+F1 --> G[Evaluate Task Completion]
 F2 --> G
 F3 --> G
 F4 --> G
