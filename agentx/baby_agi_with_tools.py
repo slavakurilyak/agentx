@@ -1,3 +1,5 @@
+# BabyAGI with Tools
+
 # Install and Import Required Modules
 
 import os
@@ -12,7 +14,6 @@ from pydantic import BaseModel, Field
 from langchain.chains.base import Chain
 
 # Connect to the Vector Store
-# Depending on what vectorstore you use, this step may look different.
 
 from langchain.vectorstores import FAISS
 from langchain.docstore import InMemoryDocstore
@@ -27,11 +28,13 @@ vectorstore = FAISS(embeddings_model.embed_query, index, InMemoryDocstore({}), {
 
 # Define the Chains
 
-# Agentx relies on three LLM chains:
+# BabyAGI relies on three LLM chains:
 
 # 1. Task creation chain to select new tasks to add to the list
 # 2. Task prioritization chain to re-prioritize tasks
 # 3. Execution Chain to execute the tasks
+
+# NOTE: in this notebook, the Execution chain will now be an agent.
 
 class TaskCreationChain(LLMChain):
     """Chain to generates tasks."""
@@ -76,27 +79,38 @@ class TaskPrioritizationChain(LLMChain):
         )
         return cls(prompt=prompt, llm=llm, verbose=verbose)
 
-class ExecutionChain(LLMChain):
-    """Chain to execute tasks."""
+from langchain.agents import ZeroShotAgent, Tool, AgentExecutor
+from langchain import OpenAI, SerpAPIWrapper, LLMChain
+todo_prompt = PromptTemplate.from_template("You are a planner who is an expert at coming up with a todo list for a given objective. Come up with a todo list for this objective: {objective}")
+todo_chain = LLMChain(llm=OpenAI(temperature=0), prompt=todo_prompt)
+search = SerpAPIWrapper()
+tools = [
+    Tool(
+        name = "Search",
+        func=search.run,
+        description="useful for when you need to answer questions about current events"
+    ),
+    Tool(
+        name = "TODO",
+        func=todo_chain.run,
+        description="useful for when you need to come up with todo lists. Input: an objective to create a todo list for. Output: a todo list for that objective. Please be very clear what the objective is!"
+    )
+]
 
-    @classmethod
-    def from_llm(cls, llm: BaseLLM, verbose: bool = True) -> LLMChain:
-        """Get the response parser."""
-        execution_template = (
-            "You are an AI who performs one task based on the following objective: {objective}."
-            " Take into account these previously completed tasks: {context}."
-            " Your task: {task}."
-            " Response:"
-        )
-        prompt = PromptTemplate(
-            template=execution_template,
-            input_variables=["objective", "context", "task"],
-        )
-        return cls(prompt=prompt, llm=llm, verbose=verbose)
 
-# Define the AgentX Controller
+prefix = """You are an AI who performs one task based on the following objective: {objective}. Take into account these previously completed tasks: {context}."""
+suffix = """Question: {task}
+{agent_scratchpad}"""
+prompt = ZeroShotAgent.create_prompt(
+    tools, 
+    prefix=prefix, 
+    suffix=suffix, 
+    input_variables=["objective", "task", "context","agent_scratchpad"]
+)
 
-# AgentX composes the chains defined above in a (potentially-)infinite loop.
+# Define the BabyAGI Controller
+
+# BabyAGI composes the chains defined above in a (potentially-)infinite loop.
 
 def get_next_task(task_creation_chain: LLMChain, result: Dict, task_description: str, task_list: List[str], objective: str) -> List[Dict]:
     """Get the next task."""
@@ -135,13 +149,13 @@ def execute_task(vectorstore, execution_chain: LLMChain, objective: str, task: s
     context = _get_top_tasks(vectorstore, query=objective, k=k)
     return execution_chain.run(objective=objective, context=context, task=task)
 
-class AgentX(Chain, BaseModel):
-    """Controller model for the AgentX agent."""
+class BabyAGI(Chain, BaseModel):
+    """Controller model for the BabyAGI agent."""
 
     task_list: deque = Field(default_factory=deque)
     task_creation_chain: TaskCreationChain = Field(...)
     task_prioritization_chain: TaskPrioritizationChain = Field(...)
-    execution_chain: ExecutionChain = Field(...)
+    execution_chain: AgentExecutor = Field(...)
     task_id_counter: int = Field(1)
     vectorstore: VectorStore = Field(init=False)
     max_iterations: Optional[int] = None
@@ -229,26 +243,29 @@ class AgentX(Chain, BaseModel):
         vectorstore: VectorStore,
         verbose: bool = False,
         **kwargs
-    ) -> "AgentX":
-        """Initialize the AgentX Controller."""
+    ) -> "BabyAGI":
+        """Initialize the BabyAGI Controller."""
         task_creation_chain = TaskCreationChain.from_llm(
             llm, verbose=verbose
         )
         task_prioritization_chain = TaskPrioritizationChain.from_llm(
             llm, verbose=verbose
         )
-        execution_chain = ExecutionChain.from_llm(llm, verbose=verbose)
+        llm_chain = LLMChain(llm=llm, prompt=prompt)
+        tool_names = [tool.name for tool in tools]
+        agent = ZeroShotAgent(llm_chain=llm_chain, allowed_tools=tool_names)
+        agent_executor = AgentExecutor.from_agent_and_tools(agent=agent, tools=tools, verbose=True)
         return cls(
             task_creation_chain=task_creation_chain,
             task_prioritization_chain=task_prioritization_chain,
-            execution_chain=execution_chain,
+            execution_chain=agent_executor,
             vectorstore=vectorstore,
             **kwargs
         )
 
-# Run the AgentX
+# Run the BabyAGI
 
-# Now it’s time to create the AgentX controller and watch it try to accomplish your objective.
+# Now it’s time to create the BabyAGI controller and watch it try to accomplish your objective.
 
 OBJECTIVE = "Write a weather report for SF today"
 
@@ -258,11 +275,11 @@ llm = OpenAI(temperature=0)
 verbose=False
 # If None, will keep on going forever
 max_iterations: Optional[int] = 3
-agent_x = AgentX.from_llm(
+baby_agi = BabyAGI.from_llm(
     llm=llm,
     vectorstore=vectorstore,
     verbose=verbose,
     max_iterations=max_iterations
 )
 
-agent_x({"objective": OBJECTIVE})
+baby_agi({"objective": OBJECTIVE})
