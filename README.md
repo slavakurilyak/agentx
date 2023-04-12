@@ -35,19 +35,25 @@ Auto-GPT and BabyAGI do not (yet) have APIs to interact with. Also they do not (
 
 ## Usage
 
-To run the AgentX controller, run the following command with the virtual environment activated:
+To use AgentX, run the following command with the virtual environment activated:
 
-```
-python main.py
+For BabyAGI without tools:
+
+```bash
+python baby_agi.py
 ```
 
-This will start the AgentX controller and run it until it completes all tasks or until it reaches the maximum number of iterations.
+For BabyAGI with tools:
+
+```bash
+python baby_agi_with_tools.py
+```
 
 ## Requirements
 
 The following modules are required and can be installed using the command `pip install -r requirements.txt`:
 
-```
+```txt
 langchain
 openai
 pydantic
