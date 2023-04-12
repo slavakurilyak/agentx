@@ -40,20 +40,28 @@ Auto-GPT and babyagi do not (yet) have APIs to interact with. Also they do not (
 
 ## Usage
 
-To use AgentX, run the following command with the virtual environment activated:
 
-```
-poetry run python agentx/main.py
-For babyagi without tools:
-
+To use AgentX, first activate the virtual environment via:
 ```bash
-poetry run python baby_agi.py
+source $(poetry env info --path)/bin/activate
+```
+For babyagi without tools: 
+```bash
+python agentx/baby_agi.py
 ```
 
 For babyagi with tools:
 
 ```bash
-poetry run python baby_agi_with_tools.py
+python agentx/baby_agi_with_tools.py
+```
+
+If you do not want to enable the virtual environment you can execute commands
+directly via poetry, which will proxy the command into the correct virtual environment.
+
+```bash
+poetry run python agentx/baby_agi.py
+poetry run python agentx/baby_agi_with_tools.py
 ```
 
 ## Requirements
