@@ -1,3 +1,5 @@
+# BabyAGI
+
 # Install and Import Required Modules
 
 import os
@@ -27,7 +29,7 @@ vectorstore = FAISS(embeddings_model.embed_query, index, InMemoryDocstore({}), {
 
 # Define the Chains
 
-# Agentx relies on three LLM chains:
+# BabyAGI relies on three LLM chains:
 
 # 1. Task creation chain to select new tasks to add to the list
 # 2. Task prioritization chain to re-prioritize tasks
@@ -94,9 +96,9 @@ class ExecutionChain(LLMChain):
         )
         return cls(prompt=prompt, llm=llm, verbose=verbose)
 
-# Define the AgentX Controller
+# Define the BabyAGI Controller
 
-# AgentX composes the chains defined above in a (potentially-)infinite loop.
+# BabyAGI composes the chains defined above in a (potentially-)infinite loop.
 
 def get_next_task(task_creation_chain: LLMChain, result: Dict, task_description: str, task_list: List[str], objective: str) -> List[Dict]:
     """Get the next task."""
@@ -135,8 +137,8 @@ def execute_task(vectorstore, execution_chain: LLMChain, objective: str, task: s
     context = _get_top_tasks(vectorstore, query=objective, k=k)
     return execution_chain.run(objective=objective, context=context, task=task)
 
-class AgentX(Chain, BaseModel):
-    """Controller model for the AgentX agent."""
+class BabyAGI(Chain, BaseModel):
+    """Controller model for the BabyAGI agent."""
 
     task_list: deque = Field(default_factory=deque)
     task_creation_chain: TaskCreationChain = Field(...)
@@ -229,8 +231,8 @@ class AgentX(Chain, BaseModel):
         vectorstore: VectorStore,
         verbose: bool = False,
         **kwargs
-    ) -> "AgentX":
-        """Initialize the AgentX Controller."""
+    ) -> "BabyAGI":
+        """Initialize the BabyAGI Controller."""
         task_creation_chain = TaskCreationChain.from_llm(
             llm, verbose=verbose
         )
@@ -246,9 +248,9 @@ class AgentX(Chain, BaseModel):
             **kwargs
         )
 
-# Run the AgentX
+# Run the BabyAGI
 
-# Now it’s time to create the AgentX controller and watch it try to accomplish your objective.
+# Now it’s time to create the BabyAGI controller and watch it try to accomplish your objective.
 
 OBJECTIVE = "Write a weather report for SF today"
 
@@ -258,11 +260,11 @@ llm = OpenAI(temperature=0)
 verbose=False
 # If None, will keep on going forever
 max_iterations: Optional[int] = 3
-agent_x = AgentX.from_llm(
+baby_agi = BabyAGI.from_llm(
     llm=llm,
     vectorstore=vectorstore,
     verbose=verbose,
     max_iterations=max_iterations
 )
 
-agent_x({"objective": OBJECTIVE})
+baby_agi({"objective": OBJECTIVE})
