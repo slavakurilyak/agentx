@@ -16,9 +16,27 @@ AgentX is a LangChain-powered agent that delegates tasks well. AgentX accomplish
 6.  AgentX receives the combined results and processes them to provide the best response.
 7.  Finally, AgentX presents the response to the user.
 
-![](agentx-proposed-architecture.png)
+```mermaid
+graph TB
+A[User] --> B[AgentX]
+B --> C[Delegate Task to Agent]
+C --> D1[Auto-GPT]
+C --> D2[BabyAGI]
+C --> D3[HuggingFace]
+C --> D4[Other AI Agent]
+D1 --> E1[Complete Task with Auto-GPT]
+D2 --> E2[Complete Task with BabyAGI]
+D3 --> E3[Complete Task with HuggingFace]
+D4 --> E4[Complete Task with Other AI Agent]
+E1 --> F[Combine Results]
+F2 --> G
+F3 --> G
+F4 --> G
+G --> H[AgentX]
+H --> I[User]
+```
 
-AgentX flowchart generated using Mermaid.js
+Note, this AgentX flowchart was generated using Mermaid.
 
 ## Limitations of AgentX
 
