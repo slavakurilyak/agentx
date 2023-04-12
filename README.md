@@ -20,6 +20,10 @@ AgentX is an AI controller that relies on three LLM chains to perform tasks. The
 
 AgentX flowchart generated using Mermaid.js
 
+## Limitations of AgentX
+
+Auto-GPT and BabyAGI do not (yet) have APIs to interact with. Also they do not (yet) have JSON manifest files (`.well-known/ai-plugin.json` and `.well-known/openai.yaml`), as described by [OpenAI](https://platform.openai.com/docs/plugins/production/plugins-in-production). This means, AgentX is (currently) limited to interacting with Auto-GPT and BabyAGI directly from the source via `$ git clone`. *More details coming soon.*
+
 ## Installation
 
 1. Clone this repository
