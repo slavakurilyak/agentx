@@ -123,3 +123,16 @@ As a result of these limitations, AgentX can only interact with Auto-GPT and bab
 - [ ] Auto-GPT from source (see [issue](https://github.com/slavakurilyak/agentx/issues/1))
 - [ ] babyagi from source (see [issue](https://github.com/slavakurilyak/agentx/issues/2))
 - [ ] Teenage-AGI from source (see [issue](https://github.com/slavakurilyak/agentx/issues/3))
+
+Sure, here's the section about contributions are welcome:
+
+## Get involved
+
+We appreciate your interest in AgentX! Here are some ways you can get involved:
+
+-   If you like our project, please consider starring it on GitHub.
+-   If you have an idea for a new feature or improvement, please open a new issue on GitHub.
+-   If you see a bug or want to implement a feature, please open a new pull request on GitHub.
+-   If you want to follow the founder on Twitter, visit [twitter.com/slavakurilyak](https://twitter.com/slavakurilyak).
+
+Thank you for your support!
