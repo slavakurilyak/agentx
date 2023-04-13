@@ -45,10 +45,10 @@ Auto-GPT and babyagi do not (yet) have APIs to interact with. Also they do not (
 
 ## Progress
 
-- [ ] babyagi via LangChain
-    - [x] [baby_agi.pi](baby_agi.py)
-    - [x] [baby_agi_with_tools.py](baby_agi_with_tools.py)
-    - [ ] [baby_agi_controller.py](baby_agi_controller.py) - *WIP*
+- [x] babyagi via LangChain
+    - [x] [baby_agi.pi](agentx/baby_agi.py)
+    - [x] [baby_agi_with_tools.py](agentx/baby_agi_with_tools.py)
+    - [x] [baby_agi_controller.py](agentx/baby_agi_controller.py) - *WIP*
 - [ ] Auto-GPT from source (see [issue](https://github.com/slavakurilyak/agentx/issues/1))
 - [ ] babyagi from source (see [issue](https://github.com/slavakurilyak/agentx/issues/2))
 - [ ] Teenage-AGI from source (see [issue](https://github.com/slavakurilyak/agentx/issues/3))
@@ -64,10 +64,13 @@ Auto-GPT and babyagi do not (yet) have APIs to interact with. Also they do not (
 
 
 To use AgentX, first activate the virtual environment via:
+
 ```bash
 source $(poetry env info --path)/bin/activate
 ```
+
 For babyagi without tools: 
+
 ```bash
 python agentx/baby_agi.py
 ```
@@ -76,6 +79,12 @@ For babyagi with tools:
 
 ```bash
 python agentx/baby_agi_with_tools.py
+```
+
+For babyagi controller (WIP):
+
+```bash
+python agentx/baby_agi_controller.py
 ```
 
 If you do not want to enable the virtual environment you can execute commands
