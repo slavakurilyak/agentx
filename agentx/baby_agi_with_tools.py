@@ -34,8 +34,6 @@ vectorstore = FAISS(embeddings_model.embed_query, index, InMemoryDocstore({}), {
 # 2. Task prioritization chain to re-prioritize tasks
 # 3. Execution Chain to execute the tasks
 
-# NOTE: in this notebook, the Execution chain will now be an agent.
-
 class TaskCreationChain(LLMChain):
     """Chain to generates tasks."""
 
@@ -78,6 +76,8 @@ class TaskPrioritizationChain(LLMChain):
             input_variables=["task_names", "next_task_id", "objective"],
         )
         return cls(prompt=prompt, llm=llm, verbose=verbose)
+
+# The Execution chain will now be an agent
 
 from langchain.agents import ZeroShotAgent, Tool, AgentExecutor
 from langchain import OpenAI, SerpAPIWrapper, LLMChain
@@ -265,7 +265,7 @@ class BabyAGI(Chain, BaseModel):
 
 # Run the BabyAGI
 
-# Now it’s time to create the BabyAGI controller and watch it try to accomplish your objective.
+# Create the BabyAGI controller and watch it try to accomplish your objective.
 
 OBJECTIVE = "Write a weather report for SF today"
 

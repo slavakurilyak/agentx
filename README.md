@@ -16,9 +16,28 @@ AgentX is a LangChain-powered agent that delegates tasks well. AgentX accomplish
 6.  AgentX receives the combined results and processes them to provide the best response.
 7.  Finally, AgentX presents the response to the user.
 
-![](agentx-proposed-architecture.png)
+```mermaid
+graph TB
+A[User] --> B[AgentX]
+B --> C[Find Relevant Agent]
+C --> D{Delegate Task to Agent}
+D --> E1[Auto-GPT]
+D --> E2[BabyAGI]
+D --> E3[HuggingFace]
+D --> E4[Other AI Agent]
+E1 --> F1[Complete Task with Auto-GPT]
+E2 --> F2[Complete Task with BabyAGI]
+E3 --> F3[Complete Task with HuggingFace]
+E4 --> F4[Complete Task with Other AI Agent]
+F1 --> G[Evaluate Task Completion]
+F2 --> G
+F3 --> G
+F4 --> G
+G --> H[AgentX]
+H --> I[User]
+```
 
-AgentX flowchart generated using Mermaid.js
+Note, this AgentX flowchart was generated using Mermaid.
 
 ## Limitations of AgentX
 
@@ -26,7 +45,10 @@ Auto-GPT and babyagi do not (yet) have APIs to interact with. Also they do not (
 
 ## Progress
 
-- [x] babyagi via LangChain (see [baby_agi.pi](baby_agi.py) and [baby_agi_with_tools.py](agentx/baby_agi_with_tools.py))
+- [ ] babyagi via LangChain
+    - [x] [baby_agi.pi](baby_agi.py)
+    - [x] [baby_agi_with_tools.py](baby_agi_with_tools.py)
+    - [ ] [baby_agi_controller.py](baby_agi_controller.py) - *WIP*
 - [ ] Auto-GPT from source (see [issue](https://github.com/slavakurilyak/agentx/issues/1))
 - [ ] babyagi from source (see [issue](https://github.com/slavakurilyak/agentx/issues/2))
 - [ ] Teenage-AGI from source (see [issue](https://github.com/slavakurilyak/agentx/issues/3))
@@ -62,6 +84,18 @@ directly via poetry, which will proxy the command into the correct virtual envir
 ```bash
 poetry run python agentx/baby_agi.py
 poetry run python agentx/baby_agi_with_tools.py
+```
+
+## Example Prompts
+
+```bash
+Can you help me create a todo list with some shopping items?
+```
+
+-or-
+
+```bash
+Can you help me create a todo list with some shopping items using some tools?
 ```
 
 ## Requirements
