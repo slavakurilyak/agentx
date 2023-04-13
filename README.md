@@ -45,7 +45,10 @@ Auto-GPT and babyagi do not (yet) have APIs to interact with. Also they do not (
 
 ## Progress
 
-- [x] babyagi via LangChain (see [baby_agi.pi](baby_agi.py) and [baby_agi_with_tools.py](baby_agi_with_tools.py))
+- [ ] babyagi via LangChain
+    - [x] [baby_agi.pi](baby_agi.py)
+    - [x] [baby_agi_with_tools.py](baby_agi_with_tools.py)
+    - [ ] [baby_agi_controller.py](baby_agi_controller.py) - *WIP*
 - [ ] Auto-GPT from source (see [issue](https://github.com/slavakurilyak/agentx/issues/1))
 - [ ] babyagi from source (see [issue](https://github.com/slavakurilyak/agentx/issues/2))
 - [ ] Teenage-AGI from source (see [issue](https://github.com/slavakurilyak/agentx/issues/3))
@@ -73,6 +76,18 @@ For babyagi with tools:
 
 ```bash
 python baby_agi_with_tools.py
+```
+
+## Example Prompts
+
+```bash
+Can you help me create a todo list with some shopping items?
+```
+
+-or-
+
+```bash
+Can you help me create a todo list with some shopping items using some tools?
 ```
 
 ## Requirements
