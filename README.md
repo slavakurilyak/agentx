@@ -1,20 +1,20 @@
 # AgentX
 
-AgentX is a LangChain-powered agent that delegates tasks well. AgentX accomplishes this by communicating in parallel with Auto-GPT, babyagi, HuggingFace, and other AI agents to complete complex tasks.
+AgentX is a LangChain-powered agent that delegates tasks to multiple AI agents to efficiently handle complex tasks. It uses LangChain to communicate in parallel with Auto-GPT, babyagi, HuggingFace, and other AI agents to complete tasks.
 
-## Proposed Architecture
+## Overview
 
-1.  A user interacts with AgentX, requesting assistance with a task.
-2.  AgentX processes the request and retrieves the necessary tools to help with the task.
-3.  AgentX selects the relevant tools from the available options: Auto-GPT, babyagi, HuggingFace, and other AI agents.
-4.  Each selected tool is then used to complete the task:
-    -   Auto-GPT completes the task using its capabilities.
-    -   babyagi completes the task using its capabilities.
-    -   HuggingFace completes the task using its capabilities.
-    -   Other AI agent completes the task using its capabilities.
-5.  The results from each tool are combined into a coherent and comprehensive output.
-6.  AgentX receives the combined results and processes them to provide the best response.
-7.  Finally, AgentX presents the response to the user.
+AgentX is a powerful tool that can help you handle complex tasks efficiently. By delegating tasks to multiple AI agents, AgentX can help you get more done in less time.
+
+## How does AgentX work?
+
+1. User requests assistance from AgentX.
+2. AgentX retrieves necessary tools.
+3. AgentX selects relevant tools.
+4. Selected tools complete the task and their results are combined.
+5. AgentX processes the combined results and presents the response to the user.
+
+This user-AgentX interaction can be visualized as:
 
 ```mermaid
 graph TB
@@ -37,84 +37,89 @@ G --> H[AgentX]
 H --> I[User]
 ```
 
-Note, this AgentX flowchart was generated using Mermaid.
+## LangChain
 
-## Limitations of AgentX
+LangChain is an open-source library and framework that provides developers with tools to build applications powered by large language models (LLMs). It is specifically designed as an orchestration tool for prompts, making it easier for developers to chain different prompts interactively. LangChain can be used for various applications such as chatbots, generative question-answering, summarization, and more. It provides a standard interface for memory, a collection of memory implementations, and examples of chains/agents that use memory. LangChain is still in beta evaluation.
 
-Auto-GPT and babyagi do not (yet) have APIs to interact with. Also they do not (yet) have JSON manifest files (`.well-known/ai-plugin.json` and `.well-known/openai.yaml`), as described by [OpenAI](https://platform.openai.com/docs/plugins/production/plugins-in-production). This means, AgentX is (currently) limited to interacting with Auto-GPT and babyagi directly from the source via `$ git clone`. *More details coming soon.*
+In AgentX, LangChain is used to communicate in parallel with multiple AI agents, enabling it to delegate tasks efficiently.
 
-## Progress
+## Benefits of using AgentX
 
-- [x] babyagi via LangChain
-    - [x] [baby_agi.pi](agentx/baby_agi.py)
-    - [x] [baby_agi_with_tools.py](agentx/baby_agi_with_tools.py)
-    - [x] [baby_agi_controller.py](agentx/baby_agi_controller.py) - *WIP*
-- [ ] Auto-GPT from source (see [issue](https://github.com/slavakurilyak/agentx/issues/1))
-- [ ] babyagi from source (see [issue](https://github.com/slavakurilyak/agentx/issues/2))
-- [ ] Teenage-AGI from source (see [issue](https://github.com/slavakurilyak/agentx/issues/3))
+-  Delegates tasks to multiple AI agents for efficient handling of complex tasks.
+-  Can handle a wide range of tasks, from answering questions to creating to-do lists.
+-  Can be customized to suit your specific needs.
 
-## Installation
+## Requirements
 
-1. Clone this repository
-2. Make sure to use python3.8 in your environment. You may install [pyenv](https://github.com/pyenv/pyenv) to manage multiple different python installations.
-3. Install [poetry](https://python-poetry.org/docs/) via `curl -sSL https://install.python-poetry.org | python3 -`
-4. Set up the project via `poetry install`
+AgentX requires Python 3.8 and Poetry for package management. Here's how to install AgentX:
+
+1. Clone this repository: `git clone git@github.com:slavakurilyak/agentx.git`
+2. Install Poetry: `curl -sSL https://install.python-poetry.org | python3 -`
+3. Set up the project: `poetry install`
 
 ## Usage
 
-
-To use AgentX, first activate the virtual environment via:
+To use AgentX, activate the virtual environment:
 
 ```bash
 source $(poetry env info --path)/bin/activate
 ```
 
-For babyagi without tools: 
+Then run AgentX with the desired tool:
 
 ```bash
 python agentx/baby_agi.py
-```
-
-For babyagi with tools:
-
-```bash
 python agentx/baby_agi_with_tools.py
-```
-
-For babyagi controller (WIP):
-
-```bash
 python agentx/baby_agi_controller.py
 ```
 
-If you do not want to enable the virtual environment you can execute commands
-directly via poetry, which will proxy the command into the correct virtual environment.
+Alternatively, you can use Poetry to run AgentX:
 
 ```bash
 poetry run python agentx/baby_agi.py
 poetry run python agentx/baby_agi_with_tools.py
+poetry run python agentx/baby_agi_controller.py
 ```
 
 ## Example Prompts
 
-```bash
-Can you help me create a todo list with some shopping items?
-```
+Try these prompts to test AgentX:
 
--or-
+> Can you help me create a to-do list with some shopping items?
 
-```bash
-Can you help me create a todo list with some shopping items using some tools?
-```
-
-## Requirements
-
-We use poetry as a package manager. Have a look [here](pyproject.toml) for further details about existing requirements.
-To add a dependency run `poetry add {{package_name}}`
-
+> Can you help me create a to-do list with some shopping items using some tools?
 
 ## .env.example
+
+The .env.example file contains a template for your OpenAI API key. Copy this file to .env and add your API key to use AgentX with OpenAI.
 
 ```
 OPENAI_API_KEY=
 ```
+
+## Current Implementations
+
+AgentX includes three implementations of the babyagi model:
+
+-  `baby_agi.py` (207 lines of code) is a simpler version of babyagi that uses LangChain.
+-  `baby_agi_with_tools.py` (220 lines of code) is a more advanced implementation of `baby_agi.py` that includes additional tools like search and todo.
+-  `baby_agi_controller.py` (*WIP*) aims to combine `baby_agi.py` and `baby_agi_with_tools.py` to create the first implementation of AgentX.
+
+## Limitations of AgentX
+
+At present, AgentX is limited in its ability to interact with Auto-GPT and babyagi directly due to the following reasons:
+
+-  These models do not currently have APIs available for interaction.
+-  They also lack JSON manifest files such as `.well-known/ai-plugin.json` and `.well-known/openai.yaml`, which are required by OpenAI.
+
+As a result of these limitations, AgentX can only interact with Auto-GPT and babyagi by directly cloning their source code using `$ git clone`. We will provide further information on these limitations shortly.
+
+## Progress
+
+-  [x] babyagi via LangChain
+    - [x] `baby_agi.py`
+    - [x] `baby_agi_with_tools.py`
+    - [x] `baby_agi_controller.py` (*WIP*)
+- [ ] Auto-GPT from source (see [issue](https://github.com/slavakurilyak/agentx/issues/1))
+- [ ] babyagi from source (see [issue](https://github.com/slavakurilyak/agentx/issues/2))
+- [ ] Teenage-AGI from source (see [issue](https://github.com/slavakurilyak/agentx/issues/3))
