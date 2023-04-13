@@ -1,3 +1,9 @@
+# intellij
+.idea/
+
+# pyenv
+.python-version
+
 # env
 .env
 

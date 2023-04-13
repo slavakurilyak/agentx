@@ -146,7 +146,7 @@ class BabyAGI(Chain, BaseModel):
     task_id_counter: int = Field(1)
     vectorstore: VectorStore = Field(init=False)
     max_iterations: Optional[int] = None
-        
+
     class Config:
         """Configuration for this pydantic object."""
         arbitrary_types_allowed = True
@@ -166,11 +166,11 @@ class BabyAGI(Chain, BaseModel):
     def print_task_result(self, result: str):
         print("\033[93m\033[1m" + "\n*****TASK RESULT*****\n" + "\033[0m\033[0m")
         print(result)
-        
+
     @property
     def input_keys(self) -> List[str]:
         return ["objective"]
-    
+
     @property
     def output_keys(self) -> List[str]:
         return []

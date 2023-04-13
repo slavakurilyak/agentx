@@ -56,26 +56,34 @@ Auto-GPT and babyagi do not (yet) have APIs to interact with. Also they do not (
 ## Installation
 
 1. Clone this repository
-2. Create a Python 3.8 virtual environment: `python3.8 -m venv .venv`
-3. Activate the virtual environment: `source .venv/bin/activate`
-4. Copy `.env.example` to create `.env`.
-5. Set your OpenAI API key in `.env`.
-6. Install the required modules by running `pip install -r requirements.txt`.
+2. Make sure to use python3.8 in your environment. You may install [pyenv](https://github.com/pyenv/pyenv) to manage multiple different python installations.
+3. Install [poetry](https://python-poetry.org/docs/) via `curl -sSL https://install.python-poetry.org | python3 -`
+4. Set up the project via `poetry install`
 
 ## Usage
 
-To use AgentX, run the following command with the virtual environment activated:
 
-For babyagi without tools:
-
+To use AgentX, first activate the virtual environment via:
 ```bash
-python baby_agi.py
+source $(poetry env info --path)/bin/activate
+```
+For babyagi without tools: 
+```bash
+python agentx/baby_agi.py
 ```
 
 For babyagi with tools:
 
 ```bash
-python baby_agi_with_tools.py
+python agentx/baby_agi_with_tools.py
+```
+
+If you do not want to enable the virtual environment you can execute commands
+directly via poetry, which will proxy the command into the correct virtual environment.
+
+```bash
+poetry run python agentx/baby_agi.py
+poetry run python agentx/baby_agi_with_tools.py
 ```
 
 ## Example Prompts
@@ -92,15 +100,9 @@ Can you help me create a todo list with some shopping items using some tools?
 
 ## Requirements
 
-The following modules are required and can be installed using the command `pip install -r requirements.txt`:
+We use poetry as a package manager. Have a look [here](pyproject.toml) for further details about existing requirements.
+To add a dependency run `poetry add {{package_name}}`
 
-```txt
-langchain
-openai
-pydantic
-faiss-cpu
-tiktoken
-```
 
 ## .env.example
 
