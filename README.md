@@ -81,6 +81,20 @@ poetry run python agentx/baby_agi_with_tools.py
 poetry run python agentx/baby_agi_controller.py
 ```
 
+### Tests
+
+Make sure to always write meaningful test cases, when you develop new features or fix bugs.
+Run tests in the projects root directory either via
+
+```bash
+pytest
+```
+when your virtual environment is enabled or otherwise
+```bash
+poetry run pytest
+```
+
+
 ## Example Prompts
 
 Try these prompts to test AgentX:
