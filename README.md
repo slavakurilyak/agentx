@@ -150,3 +150,7 @@ We appreciate your interest in AgentX! Here are some ways you can get involved:
 -   If you want to follow the founder on Twitter, visit [twitter.com/slavakurilyak](https://twitter.com/slavakurilyak).
 
 Thank you for your support!
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=slavakurilyak/AgentX&type=Date)](https://star-history.com/#slavakurilyak/AgentX&Date)
