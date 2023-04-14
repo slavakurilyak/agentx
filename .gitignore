@@ -13,3 +13,6 @@
 # pycache
 __pycache__
 .pytest_cache
+
+# python-minifier
+.minified
