@@ -12,6 +12,8 @@
 
 # pycache
 __pycache__
+
+# pytest cache
 .pytest_cache
 
 # python-minifier
