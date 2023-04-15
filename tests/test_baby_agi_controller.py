@@ -1,6 +1,7 @@
 """Test cases related to agentx/baby_agi_controller.py"""
 import pytest
-from agentx.baby_agi_controller import Task, BabyAGI
+
+from agentx.baby_agi_controller import BabyAGI, Task
 
 
 def test_task_creation():
@@ -13,7 +14,6 @@ def test_task_creation():
 
 
 class TestBabyAgi:
-
     @pytest.fixture(autouse=True)
     def set_up(self):
         self.baby_agi = BabyAGI(objective="Solve world hunger.")

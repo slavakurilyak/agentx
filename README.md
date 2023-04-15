@@ -81,6 +81,29 @@ poetry run python agentx/baby_agi_with_tools.py
 poetry run python agentx/baby_agi_controller.py
 ```
 
+### Linting
+
+We use the packages black, isort and flake8 to ensure good code quality.
+Always run the linters to check your code. You can do this via
+
+```bash
+poetry run isort --check .
+poetry run black --check .
+poetry run flake8
+```
+
+To use isort and black for autoformatting, run the commands without
+the `--check` option
+
+```bash
+poetry run isort .
+poetry run black .
+poetry run flake8
+```
+
+As always, if you have your virtual environment activated you don't need
+the `poetry run` prefix before your commands.
+
 ### Tests
 
 Make sure to always write meaningful test cases, when you develop new features or fix bugs.
