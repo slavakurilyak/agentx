@@ -17,4 +17,7 @@ __pycache__
 .pytest_cache
 
 # python-minifier
-.minified
+.python-minifier
+
+# egg-info
+*.egg-info
