@@ -2,7 +2,7 @@ import os
 import python_minifier
 
 root_dirs = ["agentx", "tests"]
-output_dir = ".minified"
+output_dir = ".python-minifier"
 
 for root_dir in root_dirs:
     for root, dirs, files in os.walk(root_dir):
