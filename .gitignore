@@ -12,4 +12,12 @@
 
 # pycache
 __pycache__
+
+# pytest cache
 .pytest_cache
+
+# python-minifier
+.python-minifier
+
+# .egg-info
+*.egg-info
