@@ -49,7 +49,7 @@ class BabyAGI:
 
     def get_agent(self, objective):
         if 'tools' in objective:
-            print('Using BabyAGIWithToolsAgent for objective:', objective)
+            print('Using BabyAGIWithTools for objective:', objective)
             # TODO: add baby_with_with_tools agent
         else:
             print('Using BabyAGI for objective:', objective)
