@@ -68,7 +68,7 @@ source $(poetry env info --path)/bin/activate
 Then run AgentX with the desired tool:
 
 ```bash
-python agentx/baby_agi.py
+python agentx/agents/babyagi/main.py
 python agentx/baby_agi_with_tools.py
 python agentx/baby_agi_controller.py
 ```
@@ -76,7 +76,7 @@ python agentx/baby_agi_controller.py
 Alternatively, you can use Poetry to run AgentX:
 
 ```bash
-poetry run python agentx/baby_agi.py
+poetry run python agentx/agents/babyagi/main.py
 poetry run python agentx/baby_agi_with_tools.py
 poetry run python agentx/baby_agi_controller.py
 ```
@@ -115,7 +115,7 @@ OPENAI_API_KEY=
 
 AgentX includes three implementations of the babyagi model:
 
--  `baby_agi.py` (207 lines of code) is a simpler version of babyagi that uses LangChain.
+-  `baby_agi.py` (agents/babyagi) is a simpler version of babyagi that uses LangChain.
 -  `baby_agi_with_tools.py` (220 lines of code) is a more advanced implementation of `baby_agi.py` that includes additional tools like search and todo.
 -  `baby_agi_controller.py` (*WIP*) aims to combine `baby_agi.py` and `baby_agi_with_tools.py` to create the first implementation of AgentX.
 
