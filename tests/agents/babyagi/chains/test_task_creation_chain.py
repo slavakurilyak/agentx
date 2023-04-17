@@ -1,7 +1,8 @@
 import pytest
-from agentx.agents.babyagi.chains import TaskCreationChain
 from langchain import PromptTemplate
 from langchain.llms import BaseLLM
+
+from agentx.agents.babyagi.chains import TaskCreationChain
 
 
 class TestTaskCreationChain:

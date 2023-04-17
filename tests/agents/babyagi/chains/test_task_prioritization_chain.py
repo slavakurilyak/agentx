@@ -1,7 +1,8 @@
 import pytest
-from agentx.agents.babyagi.chains import TaskPrioritizationChain
 from langchain import PromptTemplate
 from langchain.llms import BaseLLM
+
+from agentx.agents.babyagi.chains import TaskPrioritizationChain
 
 
 class TestTaskPrioritizationChain:
