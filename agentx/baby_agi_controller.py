@@ -1,3 +1,5 @@
+from agentx.agents.babyagi.baby_agi import BabyAGI
+
 from typing import List
 
 class Task:
@@ -7,7 +9,8 @@ class Task:
         self.objective = objective
 
 class BabyAGI:
-    def __init__(self):
+    def __init__(self, objective):
+        self.objective = objective
         self.task_list = []
         self.tools = []
 
@@ -47,10 +50,20 @@ class BabyAGI:
     def get_agent(self, objective):
         if 'tools' in objective:
             print('Using BabyAGIWithToolsAgent for objective:', objective)
-            return BabyAGIWithToolsAgent(self, objective)
+            # TODO: add baby_with_with_tools agent
         else:
-            print('Using BabyAGIAgent for objective:', objective)
-            return BabyAGIAgent(self, objective)
+            print('Using BabyAGI for objective:', objective)
+            return self
+
+    def __call__(self, inputs):
+        inputs['objective'] = self.objective
+        return self(inputs)
+
+    def process_prompt(self):
+        task_description = self.objective
+        self.add_task(Task(description=task_description, priority=1, objective=self.objective))
+        return 'Task completed successfully!'
+
 
 class Agent:
     def __init__(self, objective):
@@ -59,38 +72,9 @@ class Agent:
     def process_prompt(self):
         pass
 
-class BabyAGIAgent:
-    """A thin wrapper around BabyAGI for a specific objective."""
-
-    def __init__(self, baby_agi, objective):
-        self.baby_agi = baby_agi
-        self.objective = objective
-
-    def __call__(self, inputs):
-        inputs['objective'] = self.objective
-        return self.baby_agi(inputs)
-
-    def process_prompt(self):
-        task_description = self.objective
-        self.baby_agi.add_task(Task(description=task_description, priority=1, objective=self.objective))
-        return 'Task completed successfully!'
-
-class BabyAGIWithToolsAgent(Agent):
-    def __init__(self, baby_agi):
-        super().__init__(baby_agi.objective)
-        self.baby_agi = baby_agi
-
-    def process_prompt(self):
-        self.baby_agi.tools.append('tools')
-        task_description = self.objective
-        self.baby_agi.add_task(Task(description=task_description, priority=1))
-        self.baby_agi.objective = self.objective
-        return 'Task completed successfully!'
-
 def main():
     objective = input("Enter objective: ")
-    baby_agi = BabyAGI()
-    baby_agi.objective = objective
+    baby_agi = BabyAGI(objective)
     agent = baby_agi.get_agent(objective)
     result = agent.process_prompt()
     baby_agi.print_task_result(result)
