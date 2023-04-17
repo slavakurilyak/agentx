@@ -13,6 +13,7 @@ pydantic = "^1.10.7"
 faiss-cpu = "^1.7.3"
 tiktoken = "^0.3.3"
 google-search-results = "^2.4.2"
+python-dotenv = "^1.0.0"
 
 
 [tool.poetry.group.dev.dependencies]
