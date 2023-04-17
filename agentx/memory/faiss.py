@@ -1,9 +1,8 @@
+import faiss
 from dotenv import load_dotenv
 from langchain.docstore import InMemoryDocstore
 from langchain.embeddings import OpenAIEmbeddings
 from langchain.vectorstores import FAISS
-
-import faiss
 
 load_dotenv()
 

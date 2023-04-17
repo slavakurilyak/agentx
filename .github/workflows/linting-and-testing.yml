@@ -4,11 +4,11 @@ on:
   pull_request:
     types: [opened, synchronize]
 
-name: testing
+name: linting and testing
 
 jobs:
   test:
-    name: Automatic testing
+    name: Automatic linting and testing
     runs-on: ubuntu-latest
 
     container:
@@ -25,6 +25,15 @@ jobs:
 
       - name: Install python dependencies with Poetry
         run: poetry install
+
+      - name: Check files with isort
+        run: poetry run isort . --check
+
+      - name: Check files with Black
+        run: poetry run black . --check
+
+      - name: Lint files with flake8
+        run: poetry run flake8
 
       - name: Run tests
         run: poetry run pytest

@@ -34,6 +34,7 @@ class BabyAGI:
         print('\n*****TASK LIST*****')
         for task in self.task_list:
             print(task.description)
+        pass
 
     def print_next_task(self):
         if len(self.task_list) > 0:
@@ -63,7 +64,6 @@ class BabyAGI:
         task_description = self.objective
         self.add_task(Task(description=task_description, priority=1, objective=self.objective))
         return 'Task completed successfully!'
-
 
 class Agent:
     def __init__(self, objective):

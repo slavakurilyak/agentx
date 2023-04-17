@@ -1,15 +1,17 @@
 from collections import deque
 from typing import Any, Dict, List, Optional
 
-from agentx.agents.babyagi.chains import (TaskCreationChain,
-                                          TaskExecutionChain,
-                                          TaskPrioritizationChain)
-from agentx.agents.babyagi.utils import (execute_task, get_next_task,
-                                         prioritize_tasks)
 from langchain.chains.base import Chain
 from langchain.llms import BaseLLM
 from langchain.vectorstores.base import VectorStore
 from pydantic import BaseModel, Field
+
+from agentx.agents.babyagi.chains import (
+    TaskCreationChain,
+    TaskExecutionChain,
+    TaskPrioritizationChain,
+)
+from agentx.agents.babyagi.utils import execute_task, get_next_task, prioritize_tasks
 
 
 class BabyAGI(Chain, BaseModel):

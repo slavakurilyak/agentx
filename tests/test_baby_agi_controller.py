@@ -19,7 +19,6 @@ class TestTask:
         assert task.description == description
         assert task.objective == objective
 
-
 class TestLLM(BaseLLM):
     def __init__(self):
         super().__init__()
