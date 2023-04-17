@@ -1,5 +1,6 @@
 """Test cases related to agentx/baby_agi_controller.py"""
 import pytest
+
 from agentx.baby_agi_controller import BabyAGI, Task
 
 

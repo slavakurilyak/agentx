@@ -1,6 +1,7 @@
 from unittest.mock import MagicMock
 
 import pytest
+
 from agentx.agents.babyagi.chains import TaskCreationChain, TaskPrioritizationChain
 from agentx.agents.babyagi.utils import (
     _get_top_tasks,

@@ -1,4 +1,5 @@
 import os
+
 import python_minifier
 
 root_dirs = ["agentx", "tests"]
@@ -9,7 +10,9 @@ for root_dir in root_dirs:
         for file in files:
             if file.endswith(".py"):
                 input_path = os.path.join(root, file)
-                output_path = os.path.join(output_dir, root_dir, os.path.relpath(root, root_dir), file)
+                output_path = os.path.join(
+                    output_dir, root_dir, os.path.relpath(root, root_dir), file
+                )
                 output_dirname = os.path.dirname(output_path)
                 os.makedirs(output_dirname, exist_ok=True)
                 with open(input_path) as f:

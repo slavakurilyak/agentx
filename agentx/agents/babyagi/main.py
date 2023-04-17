@@ -1,8 +1,9 @@
 from typing import Optional
 
+from langchain import OpenAI
+
 from agentx.agents.babyagi.baby_agi import BabyAGI
 from agentx.memory.faiss import get_faiss_vectorstore_for_openapi
-from langchain import OpenAI
 
 
 def run_baby_agi():
