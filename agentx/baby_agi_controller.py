@@ -59,15 +59,20 @@ class Agent:
     def process_prompt(self):
         pass
 
-class BabyAGIAgent(Agent):
-    def __init__(self, baby_agi):
-        super().__init__(baby_agi.objective)
+class BabyAGIAgent:
+    """A thin wrapper around BabyAGI for a specific objective."""
+
+    def __init__(self, baby_agi, objective):
         self.baby_agi = baby_agi
+        self.objective = objective
+
+    def __call__(self, inputs):
+        inputs['objective'] = self.objective
+        return self.baby_agi(inputs)
 
     def process_prompt(self):
         task_description = self.objective
-        self.baby_agi.add_task(Task(description=task_description, priority=1))
-        self.baby_agi.objective = self.objective
+        self.baby_agi.add_task(Task(description=task_description, priority=1, objective=self.objective))
         return 'Task completed successfully!'
 
 class BabyAGIWithToolsAgent(Agent):
