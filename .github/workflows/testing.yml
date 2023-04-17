@@ -1,0 +1,32 @@
+on:
+  push:
+    branches: [main]
+  pull_request:
+    types: [opened, synchronize]
+
+name: testing
+
+jobs:
+  test:
+    name: Automatic testing
+    runs-on: ubuntu-latest
+
+    container:
+      image: python:3.8.16-buster
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Poetry 1.4.2
+        run: pip install poetry==1.4.2
+
+      - name: Check pyproject.toml
+        run: poetry check
+
+      - name: Install python dependencies with Poetry
+        run: poetry install
+
+      - name: Run tests
+        run: poetry run pytest
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
