@@ -71,6 +71,7 @@ Then run AgentX with the desired tool:
 python agentx/agents/babyagi/main.py
 python agentx/baby_agi_with_tools.py
 python agentx/baby_agi_controller.py
+python agentx/auto_gpt.py
 ```
 
 Alternatively, you can use Poetry to run AgentX:
@@ -79,6 +80,7 @@ Alternatively, you can use Poetry to run AgentX:
 poetry run python agentx/agents/babyagi/main.py
 poetry run python agentx/baby_agi_with_tools.py
 poetry run python agentx/baby_agi_controller.py
+poetry run python agentx/auto_gpt.py
 ```
 
 ### Linting
