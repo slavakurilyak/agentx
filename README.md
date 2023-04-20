@@ -1,10 +1,116 @@
 # AgentX
 
-AgentX is a LangChain-powered agent that delegates tasks to multiple AI agents to efficiently handle complex tasks. It uses LangChain to communicate in parallel with Auto-GPT, babyagi, HuggingFace, and other AI agents to complete tasks.
+AgentX is an experiment to develop an autonomous agent that delegates well to Auto-GPT, babyagi, and other agents using LangChain. It is a LangChain-powered agent that delegates tasks to other AI agents until user's objective is complete. It aims to assist users in completing objectives using agent retrieval, whereby objectives are outsources to other AI agents (Auto-GPT, babyagi, HuggingFace) in parallel.
 
-## Overview
+## Requirements
 
-AgentX is a powerful tool that can help you handle complex tasks efficiently. By delegating tasks to multiple AI agents, AgentX can help you get more done in less time.
+AgentX requires [Python 3.8](https://www.python.org/downloads/) and [Poetry](https://python-poetry.org/docs/#installation) for package management. 
+
+## Set Up
+
+Here's how to install AgentX:
+
+1. Clone the repository:
+
+```bash
+git clone git@github.com:slavakurilyak/agentx.git
+cd agentx
+```
+2. Set up the project and activate the virtual environment via Poetry:
+
+```bash
+poetry install
+source $(poetry env info --path)/bin/activate
+```
+
+3. Copy `.env.example` to `.env`:
+
+```bash
+cp .env.example .env
+```
+
+4. Update your `OPENAI_API_KEY` and `SERPAPI_API_KEY` values inside newly created `.env`
+
+## Usage
+
+To run the 'experimental version' of AgentX using Python, type:
+
+```bash
+python agentx/agents/autogpt/main.py
+python agentx/agents/babyagi/main.py
+```
+
+-or-
+
+```bash
+poetry run python agentx/agents/autogpt/main.py
+poetry run python agentx/agents/babyagi/main.py
+```
+
+To run the 'stable version' of AgentX using Python, type:
+
+```bash
+python agentx/autogpt.py
+python agentx/baby_agi_with_tools.py
+python agentx/baby_agi_controller.py # WIP
+```
+
+-or-
+
+```bash
+poetry run python agentx/autogpt.py
+poetry run python agentx/baby_agi_with_tools.py
+poetry run python agentx/baby_agi_controller.py # WIP
+
+```
+
+### Contibuting
+
+We use `black`, `isort` and `flake8` to ensure good code quality.
+
+Always run the linters to check your code using:
+
+```bash
+isort --check .
+black --check .
+flake8
+```
+
+-or-
+
+```bash
+poetry run isort --check .
+poetry run black --check .
+poetry run flake8
+```
+
+To use `isort` and `black` for autoformatting, run the commands without the `--check` option using:
+
+```bash
+isort .
+black .
+flake8
+```
+
+-or-
+
+```bash
+poetry run isort .
+poetry run black .
+poetry run flake8
+```
+
+Run tests in the root directory either using:
+
+```bash
+pytest
+```
+
+-or-
+
+```bash
+poetry run pytest
+```
 
 ## How does AgentX work?
 
@@ -37,112 +143,11 @@ G --> H[AgentX]
 H --> I[User]
 ```
 
-## LangChain
-
-LangChain is an open-source library and framework that provides developers with tools to build applications powered by large language models (LLMs). It is specifically designed as an orchestration tool for prompts, making it easier for developers to chain different prompts interactively. LangChain can be used for various applications such as chatbots, generative question-answering, summarization, and more. It provides a standard interface for memory, a collection of memory implementations, and examples of chains/agents that use memory. LangChain is still in beta evaluation.
-
-In AgentX, LangChain is used to communicate in parallel with multiple AI agents, enabling it to delegate tasks efficiently.
-
 ## Benefits of using AgentX
 
 -  Delegates tasks to multiple AI agents for efficient handling of complex tasks.
 -  Can handle a wide range of tasks, from answering questions to creating to-do lists.
 -  Can be customized to suit your specific needs.
-
-## Requirements
-
-AgentX requires Python 3.8 and Poetry for package management. Here's how to install AgentX:
-
-1. Clone this repository: `git clone git@github.com:slavakurilyak/agentx.git`
-2. Install Poetry: `curl -sSL https://install.python-poetry.org | python3 -`
-3. Set up the project: `poetry install`
-
-## Usage
-
-To use AgentX, activate the virtual environment:
-
-```bash
-source $(poetry env info --path)/bin/activate
-```
-
-Then run AgentX with the desired tool:
-
-```bash
-python agentx/agents/babyagi/main.py
-python agentx/baby_agi_with_tools.py
-python agentx/baby_agi_controller.py
-python agentx/auto_gpt.py
-```
-
-Alternatively, you can use Poetry to run AgentX:
-
-```bash
-poetry run python agentx/agents/babyagi/main.py
-poetry run python agentx/baby_agi_with_tools.py
-poetry run python agentx/baby_agi_controller.py
-poetry run python agentx/auto_gpt.py
-```
-
-### Linting
-
-We use the packages black, isort and flake8 to ensure good code quality.
-Always run the linters to check your code. You can do this via
-
-```bash
-poetry run isort --check .
-poetry run black --check .
-poetry run flake8
-```
-
-To use isort and black for autoformatting, run the commands without
-the `--check` option
-
-```bash
-poetry run isort .
-poetry run black .
-poetry run flake8
-```
-
-As always, if you have your virtual environment activated you don't need
-the `poetry run` prefix before your commands.
-
-### Tests
-
-Make sure to always write meaningful test cases, when you develop new features or fix bugs.
-Run tests in the projects root directory either via
-
-```bash
-pytest
-```
-when your virtual environment is enabled or otherwise
-```bash
-poetry run pytest
-```
-
-
-## Example Prompts
-
-Try these prompts to test AgentX:
-
-> Can you help me create a to-do list with some shopping items?
-
-> Can you help me create a to-do list with some shopping items using some tools?
-
-## .env.example
-
-The .env.example file contains a template for your OpenAI API key. Copy this file to .env and add your API key to use AgentX with OpenAI.
-
-```
-OPENAI_API_KEY=
-```
-
-## Current Implementations
-
-AgentX includes three implementations of the babyagi model:
-
--  `baby_agi.py` (agents/babyagi) is a simpler version of babyagi that uses LangChain.
--  `baby_agi_with_tools.py` (220 lines of code) is a more advanced implementation of `baby_agi.py` that includes additional tools like search and todo.
--  `baby_agi_controller.py` (*WIP*) aims to combine `baby_agi.py` and `baby_agi_with_tools.py` to create the first implementation of AgentX.
 
 ## Limitations of AgentX
 
@@ -155,10 +160,8 @@ As a result of these limitations, AgentX can only interact with Auto-GPT and bab
 
 ## Progress
 
--  [x] babyagi via LangChain
-    - [x] `baby_agi.py`
-    - [x] `baby_agi_with_tools.py`
-    - [x] `baby_agi_controller.py` (*WIP*)
+- [x] BabyAGI using LangChain
+- [x] Auto-GPT using LangChain
 - [ ] Auto-GPT from source (see [issue](https://github.com/slavakurilyak/agentx/issues/1))
 - [ ] babyagi from source (see [issue](https://github.com/slavakurilyak/agentx/issues/2))
 - [ ] Teenage-AGI from source (see [issue](https://github.com/slavakurilyak/agentx/issues/3))
