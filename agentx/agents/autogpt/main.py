@@ -10,7 +10,7 @@ from agentx.memory.faiss import FAISSRetriever
 
 
 def run_autogpt():
-    suggested_objective = "Write a weather report for Vancouver, Canada, today"
+    suggested_objective = "Help me do math: 11 + seven"
     user_objective = input(
         f"What is your objective? (Press enter to use the suggested objective: "
         f"'{suggested_objective}') "
