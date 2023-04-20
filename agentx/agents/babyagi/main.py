@@ -5,26 +5,18 @@ from typing import Optional
 from langchain import OpenAI
 
 from agentx.agents.babyagi.baby_agi import BabyAGI
-from agentx.memory.faiss import FAISSRetriever
+from agentx.memory.faiss import get_faiss_vectorstore_for_openapi
 
 
 def run_baby_agi():
-    suggested_objective = "Write a weather report for Vancouver, Canada, today"
-    user_objective = input(
-        f"What is your objective? (Press enter to use the suggested objective: "
-        f"'{suggested_objective}') "
-    )
+    OBJECTIVE = "Write a weather report for SF today"
 
-    if not user_objective:
-        objective = suggested_objective
-    else:
-        objective = user_objective
-
-    vectorstore = FAISSRetriever().vectorstore
+    vectorstore = get_faiss_vectorstore_for_openapi()
     llm = OpenAI(temperature=0)
 
+    # Logging of LLMChains
     verbose = False
-
+    # If None, will keep on going forever
     max_iterations: Optional[int] = 3
     baby_agi = BabyAGI.from_llm(
         llm=llm,
@@ -33,7 +25,7 @@ def run_baby_agi():
         max_iterations=max_iterations,
     )
 
-    baby_agi({"objective": objective})
+    baby_agi({"objective": OBJECTIVE})
 
 
 if __name__ == "__main__":
