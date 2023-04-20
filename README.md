@@ -70,7 +70,6 @@ Then run AgentX with the desired tool:
 ```bash
 python agentx/agents/babyagi/main.py
 python agentx/baby_agi_with_tools.py
-python agentx/baby_agi_controller.py
 ```
 
 Alternatively, you can use Poetry to run AgentX:
@@ -78,7 +77,6 @@ Alternatively, you can use Poetry to run AgentX:
 ```bash
 poetry run python agentx/agents/babyagi/main.py
 poetry run python agentx/baby_agi_with_tools.py
-poetry run python agentx/baby_agi_controller.py
 ```
 
 ### Linting
@@ -140,7 +138,6 @@ AgentX includes three implementations of the babyagi model:
 
 -  `baby_agi.py` (agents/babyagi) is a simpler version of babyagi that uses LangChain.
 -  `baby_agi_with_tools.py` (220 lines of code) is a more advanced implementation of `baby_agi.py` that includes additional tools like search and todo.
--  `baby_agi_controller.py` (*WIP*) aims to combine `baby_agi.py` and `baby_agi_with_tools.py` to create the first implementation of AgentX.
 
 ## Limitations of AgentX
 
@@ -156,7 +153,6 @@ As a result of these limitations, AgentX can only interact with Auto-GPT and bab
 -  [x] babyagi via LangChain
     - [x] `baby_agi.py`
     - [x] `baby_agi_with_tools.py`
-    - [x] `baby_agi_controller.py` (*WIP*)
 - [ ] Auto-GPT from source (see [issue](https://github.com/slavakurilyak/agentx/issues/1))
 - [ ] babyagi from source (see [issue](https://github.com/slavakurilyak/agentx/issues/2))
 - [ ] Teenage-AGI from source (see [issue](https://github.com/slavakurilyak/agentx/issues/3))
