@@ -39,3 +39,4 @@ jobs:
         run: poetry run pytest
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          SERPAPI_API_KEY: ${{ secrets.SERPAPI_API_KEY }}
