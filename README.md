@@ -52,7 +52,6 @@ To run the 'stable version' of AgentX using Python, type:
 ```bash
 python agentx/autogpt.py
 python agentx/baby_agi_with_tools.py
-python agentx/baby_agi_controller.py # WIP
 ```
 
 -or-
@@ -60,7 +59,6 @@ python agentx/baby_agi_controller.py # WIP
 ```bash
 poetry run python agentx/autogpt.py
 poetry run python agentx/baby_agi_with_tools.py
-poetry run python agentx/baby_agi_controller.py # WIP
 
 ```
 
