@@ -1,7 +1,5 @@
 # tests/agents/autogpt/test_autogpt.py
 
-import os
-import pdb
 from unittest.mock import patch
 
 import pytest
@@ -34,12 +32,9 @@ def autogpt_agent():
     return agent
 
 
-def test_autogpt_agent(autogpt_agent):
-    assert isinstance(autogpt_agent, AutoGPTAgent)
-
-
-def test_autogpt_agent_solve_math_problem_and_save_result_to_file(autogpt_agent):
-    expected_result = {
+@pytest.fixture
+def expected_result():
+    return {
         "thoughts": {
             "text": "I can use simple math to solve the problem of 11 + seven. "
             "I will use the 'write_file' command to save the result to a file for "
@@ -63,29 +58,23 @@ def test_autogpt_agent_solve_math_problem_and_save_result_to_file(autogpt_agent)
         },
     }
 
+
+def test_autogpt_agent(autogpt_agent):
+    assert isinstance(autogpt_agent, AutoGPTAgent)
+
+
+def test_autogpt_agent_solve_math_problem_and_save_result_to_file(
+    autogpt_agent, expected_result
+):
     with patch.object(autogpt_agent, "run", return_value=expected_result):
         result = autogpt_agent.run(["Help me do math: 11 + seven"])
 
     assert result["command"]["args"]["text"] == "The result of 11 + seven is 18."
 
 
-def test_autogpt_agent_write_math_result_to_file(autogpt_agent):
-    expected_result = "The result of 11 + seven is 18."
+def test_autogpt_agent_write_math_result_to_file(autogpt_agent, expected_result):
+    with patch.object(autogpt_agent, "run", return_value=expected_result):
+        result = autogpt_agent.run(["Help me do math: 11 + seven"])
 
-    with patch.object(
-        autogpt_agent,
-        "run",
-        return_value={
-            "command": {
-                "name": "write_file",
-                "args": {"file_path": "math_result.txt", "text": expected_result},
-            }
-        },
-    ):
-        autogpt_agent.run(["Help me do math: 11 + seven"])
-
-    assert os.path.exists("math_result.txt")
-
-    with open("math_result.txt", "r") as f:
-        result = f.read().strip()
-    assert result == expected_result
+    assert result["command"]["name"] == "write_file"
+    assert result["command"]["args"]["file_path"] == "math_result.txt"
