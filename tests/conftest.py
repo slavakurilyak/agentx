@@ -1,3 +1,5 @@
+# tests/conftest.py
+
 import pytest
 from dotenv import load_dotenv
 from langchain.llms import OpenAI

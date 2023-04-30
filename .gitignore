@@ -21,3 +21,6 @@ __pycache__
 
 # .egg-info
 *.egg-info
+
+# TODO
+TODO.md
